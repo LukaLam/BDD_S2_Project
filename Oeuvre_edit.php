@@ -2,7 +2,7 @@
 include("connexion_bdd.php");
 include("v_head.php");
 include("v_nav.php");
-//testet
+//test
 if(isset($_GET["id"]) AND is_numeric($_GET["id"])){
     //Accès au modèle
     $id=htmlentities($_GET['id']);
