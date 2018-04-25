@@ -2,7 +2,7 @@
 include("connexion_bdd.php");
 include("v_head.php");
 include("v_nav.php");
-
+//test
 if(isset($_POST["titre"]) AND isset($_POST["dateParution"]) AND isset($_POST["idAuteur"])){
     // Contrôle des données
     $donnees['titre']=htmlentities($_POST['titre']);
