@@ -65,8 +65,8 @@ $donneesAuteur=$reponse->fetchAll();
                         <option value="">Saisir une valeur</option>
                     <?php endif; ?>
                     <?php foreach($donneesAuteur as $auteur): ?>
-                        <option value=""<?php echo $auteur['idAuteur']; ?>"
-                            <?php if(isset($donnees['idAuteur']) and $donnees['idAuteur']==$auteur['idAuteur'])echo "selected"; ?>
+                        <option value="<?php echo $auteur['idAuteur']; ?>"
+                        <?php if(isset($donnees['idAuteur']) and $donnees['idAuteur']==$auteur['idAuteur'])echo "selected"; ?>
                     >
                             <?php echo $auteur['nomAuteur']; ?>
                     </option>

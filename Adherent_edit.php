@@ -14,11 +14,11 @@ if(isset($_GET["id"]) AND is_numeric($_GET["id"])){
     $donnees = $reponse->fetch();
 }
 
-if(isset($_POST["nomAdherent"]) AND isset($_POST["adresse"]) AND ($_POST["datePaiement"])){
-    echo "Test 2";
+if(isset($_POST["nomAdherent"]) AND isset($_POST["adresse"]) AND isset($_POST["datePaiement"])){
     $donnees["nomAdherent"]=htmlentities($_POST["nomAdherent"]);
     $donnees["adresse"] = htmlentities($_POST["adresse"]);
     $donnees["datePaiement"]=htmlentities($_POST["datePaiement"]);
+    $donnees["idAdherent"]=htmlentities($_POST["idAdherent"]);
 
     $erreurs=array();
     if( !preg_match("/^[A-Za-z ]{2,}/", $donnees["nomAdherent"])){
@@ -38,47 +38,47 @@ if(isset($_POST["nomAdherent"]) AND isset($_POST["adresse"]) AND ($_POST["datePa
     }
 
     if(empty($erreurs)){
-        echo "Test 3";
         $ma_requete_SQL="UPDATE ADHERENT SET
           nomAdherent = '". $donnees["nomAdherent"]."', 
           adresse = '". $donnees["adresse"]."', 
           datePaiement = '". $donnees["datePaiement"]."'
           WHERE idAdherent =". $donnees["idAdherent"]. ";";
+        echo $ma_requete_SQL;
         $bdd->exec($ma_requete_SQL);
         header("Location: Adherent_show.php");
     }
 }
 ?>
 
-<form method="post" action="Adherent_edit.php">
-    <div class="row">
-        <fieldset>
-            <legend>Modifier un adhérent</legend>
+    <form method="post" action="Adherent_edit.php">
+        <div class="row">
+            <fieldset>
+                <legend>Modifier un adhérent</legend>
 
-            <input name="idAdherent" type="hidden" value="<?php if(isset($donnees["idAdherent"])){ echo $donnees["idAdherent"];} ?>" />
-            <br>
+                <input name="idAdherent" type="hidden" value="<?php if(isset($donnees["idAdherent"])){ echo $donnees["idAdherent"];} ?>" />
+                <br>
 
-            <label>Nom
-                <input name="nomAdherent" type="text" size="18" value="<?php if(isset($donnees["nomAdherent"])){echo $donnees["nomAdherent"];}?>" />
-                <?php if(!empty($erreurs)){echo "<br>".$erreurs["nomAdherent"];};?>
-            </label>
-            <br>
+                <label>Nom
+                    <input name="nomAdherent" type="text" size="18" value="<?php if(isset($donnees["nomAdherent"])){echo $donnees["nomAdherent"];}?>" />
+                    <?php if(!empty($erreurs)){echo "<br>".$erreurs["nomAdherent"];};?>
+                </label>
+                <br>
 
-            <label>Adresse
-                <input name="adresse" type="text" size="18" value="<?php if(isset($donnees["adresse"])){echo $donnees["adresse"];}?>" />
-                <?php if(!empty($erreurs)){echo "<br>".$erreurs["adresse"];};?>
-            </label>
-            <br>
+                <label>Adresse
+                    <input name="adresse" type="text" size="18" value="<?php if(isset($donnees["adresse"])){echo $donnees["adresse"];}?>" />
+                    <?php if(!empty($erreurs)){echo "<br>".$erreurs["adresse"];};?>
+                </label>
+                <br>
 
-            <label>Date de paiement
-                <input name="nomAdherent" type="date" size="18" value="<?php if(isset($donnees["datePaiement"])){echo $donnees["datePaiement"];}?>" />
-                <?php if(!empty($erreurs)){echo "<br>".$erreurs["datePaiement"];};?>
-            </label>
-            <br>
+                <label>Date de paiement
+                    <input name="datePaiement" type="date" size="18" value="<?php if(isset($donnees["datePaiement"])){echo $donnees["datePaiement"];}?>" />
+                    <?php if(!empty($erreurs)){echo "<br>".$erreurs["datePaiement"];};?>
+                </label>
+                <br>
 
-            <input type="submit" name="EditAdherent" value="Modifier">
-        </fieldset>
-    </div>
-</form>
+                <input type="submit" name="EditAdherent" value="Modifier">
+            </fieldset>
+        </div>
+    </form>
 
 <?php include("v_foot.php"); ?>
